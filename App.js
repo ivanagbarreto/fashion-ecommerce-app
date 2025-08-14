@@ -8,7 +8,7 @@ export default function App() {
 
   const renderCategoryItem = ({item})=>(
     <FlatCard>
-      <Image width= {50} height={50} source={{uri:item.image}} resizeMode='contain'/> 
+      <Image width= {30} height={30} source={{uri:item.image}} resizeMode='contain'/> 
       <Text> {item.title}</Text>
    
     </FlatCard>

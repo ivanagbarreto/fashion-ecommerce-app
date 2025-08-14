@@ -14,8 +14,9 @@ export default FlatCard
 
 const styles = StyleSheet.create({
     container:{
-        justifyContent:"center",
-        alignItems:"center",
+        justifyContent:"flex-start",
+       alignItems:"flex-start",
+       gap:8,
         flexDirection:"row",
         backgroundColor:colors.white,
         padding:32,

@@ -1,10 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import categories from './src/data/categories.json'
 
 export default function App() {
+
+  const renderCategoryItem = ({item})=>(
+    <Text>{item.title}</Text>
+  )
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <FlatList
+      data={categories}
+      renderItem={renderCategoryItem}
+      keyExtractor={item=> item.id}
+      />
       <StatusBar style="auto" />
     </View>
   );

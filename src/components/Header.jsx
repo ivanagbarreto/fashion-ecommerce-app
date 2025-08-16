@@ -24,10 +24,12 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize:24,
-        color: colors.white
+        color: colors.white,
+        fontFamily:"PressStart2P-Regular"
     },
     subtitle:{
         fontSize:14,
-        color: colors.white
+        color: colors.white,
+        fontFamily:"RobotoCondensed-Regular"
     }
 })

@@ -631,7 +631,7 @@
         "price": 5000,
         "stock": 5000,
         "brand": "Comic-Con",
-        "category": "eventos",
+        "category": "vestidos",
         "discount": 10,
         "tags": ["comics", "pop-culture"],
         "mainImage": "https://i.postimg.cc/RZKq3gNR/comiccon.png"
@@ -644,7 +644,7 @@
         "price": 3000,
         "stock": 2000,
         "brand": "Feria del Libro",
-        "category": "eventos",
+        "category": "vestidos",
         "discount": 5,
         "tags": ["literature", "books"],
         "mainImage": "https://i.postimg.cc/c4KvWxWP/feriadellibro.png"

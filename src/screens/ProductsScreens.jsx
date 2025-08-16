@@ -6,7 +6,7 @@ const ProductsScreens = ({category}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])
 
   useEffect(()=>{
-    const productsFilteredByCategory = products.filter(product => product.category===category)
+    const productsFilteredByCategory = products.filter(product => product.category.toLowerCase()===category.toLowerCase())
     setProductsFiltered(productsFilteredByCategory)
   },[])  
 

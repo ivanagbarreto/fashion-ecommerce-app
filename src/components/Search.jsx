@@ -10,7 +10,7 @@ const Search = ({setKeyword}) => {
         placeholder='Buscar producto'
         onChangeText={(text)=>{setKeyword(text)}}
       />
-      <Icon name="search" size={24} color={colors.darkGray}/>
+      <Icon style={styles.searchIcon}name="search" size={24} color={colors.darkGray}/>
     </View>
   )
 }
@@ -31,5 +31,9 @@ const styles = StyleSheet.create({
         borderRadius:16,
         minWidth:"90%",
         paddingLeft:8
+    },
+    searchIcon:{
+        position:"absolute",
+        right:"24"
     }
 })

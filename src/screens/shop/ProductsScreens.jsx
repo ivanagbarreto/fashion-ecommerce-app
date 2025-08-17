@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
-import products from '../data/products.json'
+import products from '../../data/products.json'
 import { useEffect, useState } from 'react';
-import RobotoCondensedText from '../components/RobotoCondensedFont';
-import Search from '../components/Search';
+import RobotoCondensedText from '../../components/RobotoCondensedFont';
+import Search from '../../components/Search';
 
 const ProductsScreens = ({category}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])

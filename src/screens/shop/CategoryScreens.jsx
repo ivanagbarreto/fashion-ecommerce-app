@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, FlatList, Pressable } from 'react-native'
-import categories from '../data/categories.json'
-import FlatCard from '../components/FlatCard';
+import categories from '../../data/categories.json'
+import FlatCard from '../../components/FlatCard';
 
 const CategoryScreens = ({setCategorySelected}) => {
 

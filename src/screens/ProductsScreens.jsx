@@ -6,16 +6,24 @@ import Search from '../components/Search';
 
 const ProductsScreens = ({category}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])
+    const [keyword, setKeyword]= useState("")
+    console.log("Keyword: ", keyword)
 
   useEffect(()=>{
     const productsFilteredByCategory = products.filter(product => product.category.toLowerCase()===category.toLowerCase())
-    setProductsFiltered(productsFilteredByCategory)
-  },[])  
+    
+    if(keyword){
+      const productsFilteredByKeyword = productsFilteredByCategory.filter(product=> product.title.toLowerCase() .includes(keyword.toLowerCase()))
+      setProductsFiltered(productsFilteredByKeyword)
+    }else{
+      setProductsFiltered(productsFilteredByCategory)
+    }
+  },[category, keyword])  
 
 
   return (
     <View>
-        <Search/>
+        <Search setKeyword={setKeyword}/>
         <FlatList
          data={productsFiltered}
          keyExtractor={item => item.id}

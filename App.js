@@ -11,7 +11,7 @@ import CategoryScreens from './src/screens/CategoryScreens';
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [categorySelected, setCategorySelected] = useState ("")
+  const [categorySelected, setCategorySelected] = useState ("vestidos")
    const [loaded, error] = useFonts({
     'RobotoCondensed-Bold': require('./assets/fonts/RobotoCondensed-Bold.ttf'),
     'RobotoCondensed-Italic': require('./assets/fonts/RobotoCondensed-Italic.ttf'),
@@ -25,7 +25,7 @@ useEffect(() => {
       SplashScreen.hideAsync();
     }
   }, [loaded, error]);
-  
+
   if (!loaded && !error) {
     return null;
   }

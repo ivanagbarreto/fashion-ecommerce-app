@@ -3,15 +3,15 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native';
-import Header from './src/components/Header'
-import ProductsScreens from './src/screens/shop/ProductsScreens';
+import Header from './src/components/Header';
 import { useState, useEffect } from 'react';
-import CategoryScreens from './src/screens/shop/CategoryScreens';
+import ShopStackNavigator from './src/navigation/shop/ShopStackNavigator';
+import {NavigationContainer} from "@react-navigation/native";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [categorySelected, setCategorySelected] = useState ("vestidos")
+  
    const [loaded, error] = useFonts({
     'RobotoCondensed-Bold': require('./assets/fonts/RobotoCondensed-Bold.ttf'),
     'RobotoCondensed-Italic': require('./assets/fonts/RobotoCondensed-Italic.ttf'),
@@ -32,24 +32,13 @@ useEffect(() => {
 
 
   return (
-    <>
     
+    <NavigationContainer>
       <StatusBar style="auto" />
-      {
-        categorySelected
-        ?
-        <>
-        <Header title="Fashion" subtitle="Productos"/>
-        <ProductsScreens category={categorySelected}/>
-      </>
-      :
-      <>
-      <Header title="Fashion" subtitle="Categorias"/>
-      <CategoryScreens setCategorySelected={setCategorySelected}/>
-      </>
-      }
+      <ShopStackNavigator/>
+    </NavigationContainer>
       
-    </>
+   
   );
 }
 

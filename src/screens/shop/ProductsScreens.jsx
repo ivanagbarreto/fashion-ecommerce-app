@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import RobotoCondensedText from '../../components/RobotoCondensedFont';
 import Search from '../../components/Search';
 
-const ProductsScreens = ({category}) => {
+const ProductsScreens = ({route}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])
     const [keyword, setKeyword]= useState("")
-    console.log("Keyword: ", keyword)
+   // console.log("Keyword: ", keyword)
+
+   const {category} = route.params
 
   useEffect(()=>{
     const productsFilteredByCategory = products.filter(product => product.category.toLowerCase()===category.toLowerCase())

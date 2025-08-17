@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import products from '../data/products.json'
 import { useEffect, useState } from 'react';
+import RobotoCondensedText from '../components/RobotoCondensedFont';
+import Search from '../components/Search';
 
 const ProductsScreens = ({category}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])
@@ -13,10 +15,11 @@ const ProductsScreens = ({category}) => {
 
   return (
     <View>
+        <Search/>
         <FlatList
          data={productsFiltered}
          keyExtractor={item => item.id}
-         renderItem={({item}) => <Text>{item.title}</Text>}
+         renderItem={({item}) => <RobotoCondensedText>{item.title}</RobotoCondensedText>}
          />
     </View>
   )

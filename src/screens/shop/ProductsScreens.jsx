@@ -1,15 +1,24 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
 import products from '../../data/products.json'
 import { useEffect, useState } from 'react';
 import RobotoCondensedText from '../../components/RobotoCondensedFont';
 import Search from '../../components/Search';
 
-const ProductsScreens = ({route}) => {
+const ProductsScreens = ({navigation, route}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])
     const [keyword, setKeyword]= useState("")
    // console.log("Keyword: ", keyword)
 
    const {category} = route.params
+
+   const renderProductsItem =({item})=>(
+        
+        <View>
+          <Pressable onPress={() => navigation.navigate("Producto")}>
+            <RobotoCondensedText>{item.title}</RobotoCondensedText>
+           </Pressable> 
+        </View>
+        )
 
   useEffect(()=>{
     const productsFilteredByCategory = products.filter(product => product.category.toLowerCase()===category.toLowerCase())
@@ -29,7 +38,7 @@ const ProductsScreens = ({route}) => {
         <FlatList
          data={productsFiltered}
          keyExtractor={item => item.id}
-         renderItem={({item}) => <RobotoCondensedText>{item.title}</RobotoCondensedText>}
+         renderItem={renderProductsItem }
          />
     </View>
   )

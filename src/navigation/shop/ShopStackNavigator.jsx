@@ -1,25 +1,21 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CategoriesScreens, ProductScreens, ProductsScreens} from "../../screens";
 import { colors } from "../../global/colors";
-
+import { useSelector } from "react-redux";
+import Header from "../../components/Header";
 
 
 const Stack = createNativeStackNavigator ()
 
 const ShopStackNavigator = () =>{
+
+        const categorySelected = useSelector(state => state.shopReducer.categorySelected)
     return(
        
             <Stack.Navigator
             initialRouteName="Categorias"
             screenOptions={{
-                headerStyle:{
-                        backgroundColor:colors.lightPink
-                },
-                headerTitleStyle:{
-                        fontFamily:"PressStart2P-Regular",
-                        textTransform: 'uppercase',
-                        fontSize: 12
-                }
+                header:({route})=>( <Header title="FASHION" subtitle={route.name==="Categorias"?"Home":categorySelected}/>)
             }
 
             }

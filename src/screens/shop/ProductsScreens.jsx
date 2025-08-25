@@ -3,14 +3,16 @@ import products from '../../data/products.json'
 import { useEffect, useState } from 'react';
 import RobotoCondensedText from '../../components/RobotoCondensedFont';
 import Search from '../../components/Search';
+import { useSelector } from 'react-redux';
+
 
 const ProductsScreens = ({navigation, route}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])
     const [keyword, setKeyword]= useState("")
    // console.log("Keyword: ", keyword)
 
-   const {category} = route.params
-
+   //const {category} = route.params
+  const category = useSelector(state => state.shopReducer.categorySelected)
    const renderProductsItem =({item})=>(
         
         <View>

@@ -6,17 +6,26 @@ import {
   FlatList,
   Pressable,
 } from "react-native";
-import categories from "../../data/categories.json";
+//import categories from "../../data/categories.json";
 import FlatCard from "../../components/FlatCard";
 import Icon from "react-native-vector-icons/Feather";
 import { colors } from "../../global/colors";
+import { useSelector, useDispatch } from "react-redux";
+import { setCategorySelected } from "../../store/slices/ShopSlice";
+
+
 const CategoriesScreens = ({ navigation }) => {
+    const categories = useSelector(state => state.shopReducer.categories)
+    const dispatch = useDispatch ()
+    const handleSelectedCategory = (category) =>{
+        dispatch(setCategorySelected(category))
+        navigation.navigate("Productos")
+    }
+
   const renderCategoryItem = ({ item }) => {
     return (
       <Pressable
-        onPress={() =>
-          navigation.navigate("Productos", { category: item.title })
-        }
+        onPress={() =>handleSelectedCategory(item.title)}
       >
         <FlatCard style={styles.container}>
           

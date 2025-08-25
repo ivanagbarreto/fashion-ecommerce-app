@@ -31,7 +31,7 @@ const CategoriesScreens = ({ navigation }) => {
               <Text style={styles.title}> {item.title}</Text>
             
        
-              <Icon name={item.icon} size={15} color={colors.darkGray} />
+              <Icon style={styles.icon} name={item.icon} size={15} color={colors.darkGray} />
            
          
         </FlatCard>

@@ -3,8 +3,8 @@ import products from '../../data/products.json'
 import { useEffect, useState } from 'react';
 import RobotoCondensedText from '../../components/RobotoCondensedFont';
 import Search from '../../components/Search';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setProductSelected } from '../../store/slices/ShopSlice';
 
 const ProductsScreens = ({navigation, route}) => {
     const [productsFiltered, setProductsFiltered] = useState ([])
@@ -13,10 +13,18 @@ const ProductsScreens = ({navigation, route}) => {
 
    //const {category} = route.params
   const category = useSelector(state => state.shopReducer.categorySelected)
+
+  const handleSelectedProduct = (product) =>{
+    dispatch(setProductSelected(product))
+     navigation.navigate("Producto")
+  }
+
+  const dispatch = useDispatch()
+
    const renderProductsItem =({item})=>(
         
         <View>
-          <Pressable onPress={() => navigation.navigate("Producto")}>
+          <Pressable onPress={() => handleSelectedProduct (item)}>
             <RobotoCondensedText>{item.title}</RobotoCondensedText>
            </Pressable> 
         </View>

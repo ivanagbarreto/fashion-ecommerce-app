@@ -2,15 +2,17 @@ import { FlatList, StyleSheet, Text, View, Image, Pressable } from 'react-native
 import { colors } from '../../global/colors'
 import FlatCard from '../../components/FlatCard'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { useSelector } from 'react-redux'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { removeItems } from '../../store/slices/CartSlice'
 
 const CartScreen = () => {
   const cartItems = useSelector( state => state.cartReducer.cartItems)
-  
+  const total = useSelector(state=>state.cartReducer.total)
+  const dispatch = useDispatch()
+
   const FooterComponent = () => (
     <View style={styles.footerContainer}>
-      <Text style={styles.footerTotal}>Total: $ </Text>
+      <Text style={styles.footerTotal}>Total: $ {total}</Text>
       <Pressable style={styles.confirmButton}>
         <Text style={styles.confirmButtonText}>Confirmar</Text>
       </Pressable>
@@ -32,7 +34,7 @@ const CartScreen = () => {
         <Text style={styles.price}>Precio unitario: $ {item.price}</Text>
         <Text stlyle={styles.quantity}>Cantidad: {item.quantity}</Text>
         <Text style={styles.total}>Total: $ {item.quantity * item.price}</Text>
-        <Pressable onPress={null}>
+        <Pressable onPress={() => dispatch(removeItems(item.id))}>
           <Icon name="delete" size={24} color={colors.red} style={styles.trashIcon} />
         </Pressable>
       </View>

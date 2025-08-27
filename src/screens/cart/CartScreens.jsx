@@ -2,11 +2,11 @@ import { FlatList, StyleSheet, Text, View, Image, Pressable } from 'react-native
 import { colors } from '../../global/colors'
 import FlatCard from '../../components/FlatCard'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 
 const CartScreen = () => {
-  const [cartItems, setCartItems] = useState([])
+  const cartItems = useSelector( state => state.cartReducer.cartItems)
   
   const FooterComponent = () => (
     <View style={styles.footerContainer}>

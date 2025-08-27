@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View, Pressable, Image, ScrollView, useWindowDimensions } from 'react-native'
 import { colors } from '../../global/colors'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addItemTocart } from '../../store/slices/CartSlice'
+
 
 const ProductScreen = () => {
     const  product  = useSelector(state=>state.shopReducer.productSelected)
     const { width } = useWindowDimensions()
-
+    const dispatch = useDispatch()
     return (
         <ScrollView style={styles.productContainer}>
             <Text style={styles.textBrand}>{product.brand}</Text>
@@ -36,7 +38,7 @@ const ProductScreen = () => {
             <Text style={styles.price}>Precio: ${product.price}</Text>
             <Pressable
                 style={({ pressed }) => [{ opacity: pressed ? 0.95 : 1 }, styles.addToCartButton]}
-                onPress={null}>
+                onPress={()=> dispatch(addItemTocart({product:product,quantity:1}))}>
                 <Text style={styles.textAddToCart}>Agregar al carrito</Text>
             </Pressable>
         </ScrollView>
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     addToCartButton: {
         padding: 8,
         paddingHorizontal: 16,
-        backgroundColor: colors.purple,
+        backgroundColor: colors.lightPink,
         borderRadius: 16,
         marginVertical: 16
     },

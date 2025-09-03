@@ -10,10 +10,10 @@ const cartSlice = createSlice({
     },
     reducers:{
             addItemTocart: (state, action)=>{
-                const {product, quantity} = action.payload
-                const productInCart= state.cartItems.find(item => item.id===product.id)
+                const {product, quantity, size} = action.payload
+                const productInCart= state.cartItems.find(item => item.id===product.id && item.size === size)
                 if(!productInCart){
-                    state.cartItems.push({...product,quantity})
+                    state.cartItems.push({...product,quantity, size})
                 }else{
                     productInCart.quantity+=1
                 }
@@ -22,7 +22,8 @@ const cartSlice = createSlice({
             
             },
             removeItems : (state,action)=>{
-             state.cartItems= state.cartItems.filter(item=>item.id!==action.payload)
+             state.cartItems= state.cartItems.filter(
+                item => !(item.id === action.payload.id && item.size === action.payload.size))
              state.total = state.cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
              state.updatedAt = new Date().toLocaleString();
         },

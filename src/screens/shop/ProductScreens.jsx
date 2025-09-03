@@ -2,12 +2,14 @@ import { StyleSheet, Text, View, Pressable, Image, ScrollView, useWindowDimensio
 import { colors } from '../../global/colors'
 import { useSelector, useDispatch } from 'react-redux'
 import { addItemTocart } from '../../store/slices/CartSlice'
-
+import { useState } from 'react'
 
 const ProductScreen = () => {
     const  product  = useSelector(state=>state.shopReducer.productSelected)
     const { width } = useWindowDimensions()
     const dispatch = useDispatch()
+    const [selectedSize, setSelectedSize] = useState(null)
+
     return (
         <ScrollView style={styles.productContainer}>
             <Text style={styles.textBrand}>{product.brand}</Text>
@@ -20,6 +22,28 @@ const ProductScreen = () => {
                 resizeMode='contain'
             />
             <Text style={styles.longDescription}>{product.longDescription}</Text>
+            <View style={styles.sizeContainer}>
+                <Text style={styles.sizeLabel}>Seleccioná tu talle:</Text>
+                <View style={styles.sizesRow}>
+                    {["S", "M", "L", "XL"].map(size => (
+                        <Pressable
+                            key={size}
+                            style={[
+                                styles.sizeButton,
+                                selectedSize === size && styles.sizeButtonSelected
+                            ]}
+                            onPress={() => setSelectedSize(size)}
+                        >
+                            <Text style={[
+                                styles.sizeText,
+                                selectedSize === size && styles.sizeTextSelected
+                            ]}>
+                                {size}
+                            </Text>
+                        </Pressable>
+                    ))}
+                </View>
+            </View>
             <View style={styles.tagsContainer}>
                 <View style={styles.tags}>
                     <Text style={styles.tagText}>Tags : </Text>
@@ -38,7 +62,11 @@ const ProductScreen = () => {
             <Text style={styles.price}>Precio: ${product.price}</Text>
             <Pressable
                 style={({ pressed }) => [{ opacity: pressed ? 0.95 : 1 }, styles.addToCartButton]}
-                onPress={()=> dispatch(addItemTocart({product:product,quantity:1}))}>
+                onPress={() => dispatch(addItemTocart({
+    product: product,
+    quantity: 1,
+    size: selectedSize  // 👈 aquí viaja el talle
+}))}>
                 <Text style={styles.textAddToCart}>Agregar al carrito</Text>
             </Pressable>
         </ScrollView>
@@ -117,5 +145,36 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: 24,
         textAlign: 'center',
-    }
+    },
+     sizeContainer: {
+        marginVertical: 12,
+    },
+    sizeLabel: {
+        fontSize: 16,
+        fontWeight: '600',
+        marginBottom: 8,
+    },
+    sizesRow: {
+        flexDirection: "row",
+        gap: 10,
+    },
+    sizeButton: {
+        borderWidth: 1,
+        borderColor: colors.grisOscuro,
+        borderRadius: 8,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+    },
+    sizeButtonSelected: {
+        backgroundColor: colors.lightPink,
+        borderColor: colors.lightPink,
+    },
+    sizeText: {
+        fontSize: 16,
+        fontWeight: "500",
+    },
+    sizeTextSelected: {
+        color: colors.white,
+    },
+    
 })
